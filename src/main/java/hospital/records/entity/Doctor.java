@@ -13,6 +13,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -24,6 +26,8 @@ public class Doctor {
 	private String doctorName;
 	private String doctorSpecialty;
 	
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(
 			name = "doctor_patient",
@@ -31,6 +35,8 @@ public class Doctor {
 			inverseJoinColumns = @JoinColumn(name = "patient_id"))
 	private Set<Patient> patients = new HashSet<>();
 	
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@ManyToOne
 	private Set<Office> offices = new HashSet<>();
 }

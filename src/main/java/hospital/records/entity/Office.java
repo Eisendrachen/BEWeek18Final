@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -22,6 +24,8 @@ public class Office {
 	private String officeZip;
 	private String officePhone;
 	
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Doctor> doctors = new HashSet<>();
 }
