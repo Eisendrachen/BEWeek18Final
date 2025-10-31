@@ -19,11 +19,14 @@ public class Patient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long patientId;
-	
+	@EqualsAndHashCode.Exclude
 	private String patientInsurance;
+	@EqualsAndHashCode.Exclude
 	private String patientPhone;
+	@EqualsAndHashCode.Exclude
 	private String patientAddress;
 	
+	@EqualsAndHashCode.Exclude
 	@OneToOne
 	private Record record;
 	
