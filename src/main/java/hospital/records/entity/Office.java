@@ -24,6 +24,7 @@ public class Office {
 	private String officeZip;
 	private String officePhone;
 	
+	//One side of the one to many relationship with the Doctor entity
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

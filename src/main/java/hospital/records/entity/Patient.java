@@ -26,10 +26,12 @@ public class Patient {
 	@EqualsAndHashCode.Exclude
 	private String patientAddress;
 	
+	//One to one relationship with Record entity
 	@EqualsAndHashCode.Exclude
 	@OneToOne
 	private Record record;
 	
+	//Other side of the many to many relationship that uses the doctor_patient join table
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToMany(mappedBy = "patients")

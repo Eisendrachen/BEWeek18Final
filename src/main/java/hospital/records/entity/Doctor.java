@@ -26,6 +26,7 @@ public class Doctor {
 	private String doctorName;
 	private String doctorSpecialty;
 	
+	//One side of the many to many relationship with Patient which creates a doctor_patient join table
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToMany(cascade = CascadeType.PERSIST)
@@ -35,6 +36,7 @@ public class Doctor {
 			inverseJoinColumns = @JoinColumn(name = "patient_id"))
 	private Set<Patient> patients = new HashSet<>();
 	
+	//Many side of the one to many relationship with Office entity
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToOne
