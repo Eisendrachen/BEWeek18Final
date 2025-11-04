@@ -38,5 +38,5 @@ public class Doctor {
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToOne
-	private Set<Office> offices = new HashSet<>();
+	private Office office;
 }
