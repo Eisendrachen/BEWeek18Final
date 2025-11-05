@@ -9,7 +9,7 @@ public class RecordData {
 	private Long recordId;
 	private String diagnosis;
 	
-	public RecordData(Record record) {
-		this.recordId
-	}
+	//public RecordData(Record record) {
+	//	this.recordId = 
+	//}
 }
