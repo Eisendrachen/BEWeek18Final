@@ -40,5 +40,6 @@ public class Doctor {
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToOne
+	@JoinColumn(name = "office_id", nullable = false)
 	private Office office;
 }

@@ -13,13 +13,11 @@ CREATE TABLE doctor (
 
 CREATE TABLE office (
 	office_id int NOT NULL AUTO_INCREMENT,
-	doctor_id int NOT NULL,
 	office_location varchar(128) NOT NULL,
 	office_name varchar(128) NOT NULL,
 	office_zip varchar(10),
 	office_phone varchar(24),
-	PRIMARY KEY (office_id),
-	FOREIGN KEY (doctor_id) REFERENCES doctor (doctor_id) ON DELETE CASCADE
+	PRIMARY KEY (office_id)
 );
 
 CREATE TABLE record (

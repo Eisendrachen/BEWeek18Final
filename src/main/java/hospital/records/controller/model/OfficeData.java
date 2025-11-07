@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OfficeData {
 	private Long officeId;
+	private String officeLocation;
 	private String officeName;
 	private String officeZip;
 	private String officePhone;
@@ -19,6 +20,7 @@ public class OfficeData {
 	
 	public OfficeData(Office office) {
 		this.officeId = office.getOfficeId();
+		this.officeLocation = office.getOfficeLocation();
 		this.officeName = office.getOfficeName();
 		this.officeZip = office.getOfficeZip();
 		this.officePhone = office.getOfficePhone();
@@ -29,8 +31,9 @@ public class OfficeData {
 	}
 	
 	//For test if I decide to do that
-	public OfficeData(Long officeId, String officeName, String officeZip, String officePhone) {
+	public OfficeData(Long officeId, String officeLocation, String officeName, String officeZip, String officePhone) {
 		this.officeId = officeId;
+		this.officeLocation = officeLocation;
 		this.officeName = officeName;
 		this.officeZip = officeZip;
 		this.officePhone = officePhone;
@@ -40,6 +43,7 @@ public class OfficeData {
 		Office office = new Office();
 		
 		office.setOfficeId(officeId);
+		office.setOfficeLocation(officeLocation);
 		office.setOfficeName(officeName);
 		office.setOfficeZip(officeZip);
 		office.setOfficePhone(officePhone);

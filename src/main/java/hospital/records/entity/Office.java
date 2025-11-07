@@ -10,8 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Data
@@ -20,13 +18,13 @@ public class Office {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long officeId;
 	
+	private String officeLocation;
 	private String officeName;
 	private String officeZip;
 	private String officePhone;
 	
 	//One side of the one to many relationship with the Doctor entity
-	@EqualsAndHashCode.Exclude
-	@ToString.Exclude
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Doctor> doctors = new HashSet<>();
 }
