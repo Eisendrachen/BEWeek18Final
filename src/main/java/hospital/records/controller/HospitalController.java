@@ -1,5 +1,7 @@
 package hospital.records.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +32,13 @@ public class HospitalController {
 	}
 	
 	@GetMapping("/office/{officeId}")
-	public OfficeData retrieveOffice(@PathVariable Long officeId, @RequestBody OfficeData officeData) {
+	public OfficeData retrieveOffice(@PathVariable Long officeId) {
 		log.info("Getting office ID:{}", officeId);
 		return hospitalService.retrieveOfficeWithId(officeId);
+	}
+	
+	public List<OfficeData> retrieveAllOffices() {
+		log.info("Getting all offices in database");
+		return hospitalService.retrieveAllOffices();
 	}
 }
