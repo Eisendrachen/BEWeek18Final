@@ -48,5 +48,10 @@ public class HospitalService {
 		
 		return officeDtos;
 	}
+
+	public void deleteOffice(Long officeId) {
+		Office office = findOfficeWithId(officeId);
+		hospitalDao.delete(office);
+	}
 	
 }

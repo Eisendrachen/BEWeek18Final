@@ -1,6 +1,7 @@
 package hospital.records.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,8 +38,16 @@ public class HospitalController {
 		return hospitalService.retrieveOfficeWithId(officeId);
 	}
 	
+	@GetMapping("/office")
 	public List<OfficeData> retrieveAllOffices() {
 		log.info("Getting all offices in database");
 		return hospitalService.retrieveAllOffices();
+	}
+	
+	public Map<String, String> deleteOffice(@PathVariable Long officeId){
+		log.info("Deleting office ID:{}", officeId);
+		hospitalService.deleteOffice(officeId);
+		
+		return Map.of("message", "Office ID=" + officeId + " was deleted.");
 	}
 }
