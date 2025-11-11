@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hospital.records.controller.model.OfficeData;
-import hospital.records.dao.HospitalDao;
+import hospital.records.dao.OfficeDao;
 import hospital.records.entity.Office;
 
 @Service
 public class HospitalService {
 
 	@Autowired
-	private HospitalDao hospitalDao;
+	private OfficeDao officeDao;
 	
 	@Transactional(readOnly = false)
 	public OfficeData saveOffice(OfficeData officeData) {
 		Office office = officeData.toOffice();
-		Office dbOffice = hospitalDao.save(office);
+		Office dbOffice = officeDao.save(office);
 		
 		return new OfficeData(dbOffice);
 	}
@@ -34,11 +34,11 @@ public class HospitalService {
 	
 	//Finds the office with the ID given or throws an exception due to the fact findById returns an optional
 	private Office findOfficeWithId(Long officeId) {
-		return hospitalDao.findById(officeId).orElseThrow(() -> new NoSuchElementException("Office with ID: " + officeId + " does not exist."));
+		return officeDao.findById(officeId).orElseThrow(() -> new NoSuchElementException("Office with ID: " + officeId + " does not exist."));
 	}
 
 	public List<OfficeData> retrieveAllOffices() {
-		List<Office> officeEntities = hospitalDao.findAll();
+		List<Office> officeEntities = officeDao.findAll();
 		List<OfficeData> officeDtos = new LinkedList<>();
 		
 		for(Office office : officeEntities) {
@@ -51,7 +51,7 @@ public class HospitalService {
 
 	public void deleteOffice(Long officeId) {
 		Office office = findOfficeWithId(officeId);
-		hospitalDao.delete(office);
+		officeDao.delete(office);
 	}
 	
 }
