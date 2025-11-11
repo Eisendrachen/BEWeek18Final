@@ -1,5 +1,7 @@
 package hospital.records.service;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,4 +24,15 @@ public class HospitalService {
 		return new OfficeData(dbOffice);
 	}
 
+	@Transactional(readOnly = true)
+	public OfficeData retrieveOfficeWithId(Long officeId) {
+		Office office = findOfficeWithId(officeId);
+		return new OfficeData(office);
+	}
+	
+	//Finds the office with the ID given or throws an exception due to the fact findById returns an optional
+	private Office findOfficeWithId(Long officeId) {
+		return officeDao.findById(officeId).orElseThrow(() -> new NoSuchElementException("Office with ID: " + officeId + " does not exist."));
+	}
+	
 }

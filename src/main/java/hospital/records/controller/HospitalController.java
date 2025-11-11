@@ -2,11 +2,14 @@ package hospital.records.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import hospital.records.controller.model.OfficeData;
 import hospital.records.service.HospitalService;
@@ -24,5 +27,11 @@ public class HospitalController {
 	public OfficeData createOffice(@RequestBody OfficeData officeData) {
 		log.info("Creating office {}", officeData);
 		return hospitalService.saveOffice(officeData);
+	}
+	
+	@GetMapping("/office/{officeId}")
+	public OfficeData retrieveOffice(@PathVariable Long officeId, @RequestBody OfficeData officeData) {
+		log.info("Getting office ID:{}", officeId);
+		return hospitalService.retrieveOfficeWithId(officeId);
 	}
 }
