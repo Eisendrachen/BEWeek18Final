@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,7 @@ public class HospitalController {
 		return hospitalService.retrieveAllOffices();
 	}
 	
+	@DeleteMapping("/office/{officeId}")
 	public Map<String, String> deleteOffice(@PathVariable Long officeId){
 		log.info("Deleting office ID:{}", officeId);
 		hospitalService.deleteOffice(officeId);

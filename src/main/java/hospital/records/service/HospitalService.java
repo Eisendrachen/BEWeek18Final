@@ -37,6 +37,7 @@ public class HospitalService {
 		return officeDao.findById(officeId).orElseThrow(() -> new NoSuchElementException("Office with ID: " + officeId + " does not exist."));
 	}
 
+	@Transactional(readOnly = true)
 	public List<OfficeData> retrieveAllOffices() {
 		List<Office> officeEntities = officeDao.findAll();
 		List<OfficeData> officeDtos = new LinkedList<>();
@@ -49,6 +50,7 @@ public class HospitalService {
 		return officeDtos;
 	}
 
+	@Transactional(readOnly = false)
 	public void deleteOffice(Long officeId) {
 		Office office = findOfficeWithId(officeId);
 		officeDao.delete(office);
