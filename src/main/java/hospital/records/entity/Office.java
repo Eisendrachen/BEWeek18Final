@@ -25,6 +25,6 @@ public class Office {
 	
 	//One side of the one to many relationship with the Doctor entity
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Doctor> doctors = new HashSet<>();
 }
