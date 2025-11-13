@@ -14,6 +14,7 @@ import hospital.records.controller.model.PatientData;
 import hospital.records.dao.DoctorDao;
 import hospital.records.dao.OfficeDao;
 import hospital.records.dao.PatientDao;
+import hospital.records.dao.RecordDao;
 import hospital.records.entity.Doctor;
 import hospital.records.entity.Office;
 import hospital.records.entity.Patient;
@@ -28,6 +29,8 @@ public class HospitalService {
 	private DoctorDao doctorDao;
 	@Autowired
 	private PatientDao patientDao;
+	@Autowired
+	private RecordDao recordDao;
 	
 	//Post service methods
 	
