@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -25,11 +24,6 @@ public class Patient {
 	private String patientPhone;
 	@EqualsAndHashCode.Exclude
 	private String patientAddress;
-	
-	//One to one relationship with Record entity
-	@EqualsAndHashCode.Exclude
-	@OneToOne
-	private Record record;
 	
 	//Other side of the many to many relationship that uses the doctor_patient join table
 	@EqualsAndHashCode.Exclude

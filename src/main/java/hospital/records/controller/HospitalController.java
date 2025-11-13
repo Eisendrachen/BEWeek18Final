@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import hospital.records.controller.model.DoctorData;
 import hospital.records.controller.model.OfficeData;
 import hospital.records.controller.model.PatientData;
 import hospital.records.service.HospitalService;
@@ -34,6 +34,13 @@ public class HospitalController {
 	public OfficeData createOffice(@RequestBody OfficeData officeData) {
 		log.info("Creating office {}", officeData);
 		return hospitalService.saveOffice(officeData);
+	}
+	
+	@PostMapping("/doctor")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public DoctorData createDoctor(@RequestBody DoctorData doctorData) {
+		log.info("Creating doctor {}", doctorData);
+		return hospitalService.saveDoctor(doctorData);
 	}
 	
 	@PostMapping("/patient")

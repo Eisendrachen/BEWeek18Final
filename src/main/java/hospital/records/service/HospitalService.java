@@ -8,18 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import hospital.records.controller.model.DoctorData;
 import hospital.records.controller.model.OfficeData;
 import hospital.records.controller.model.PatientData;
+import hospital.records.dao.DoctorDao;
 import hospital.records.dao.OfficeDao;
 import hospital.records.dao.PatientDao;
+import hospital.records.entity.Doctor;
 import hospital.records.entity.Office;
 import hospital.records.entity.Patient;
 
 @Service
 public class HospitalService {
 
+	//Dao references
 	@Autowired
 	private OfficeDao officeDao;
+	private DoctorDao doctorDao;
 	private PatientDao patientDao;
 	
 	//Post service methods
@@ -30,6 +35,14 @@ public class HospitalService {
 		Office dbOffice = officeDao.save(office);
 		
 		return new OfficeData(dbOffice);
+	}
+	
+	@Transactional(readOnly = false)
+	public DoctorData saveDoctor(DoctorData doctorData) {
+		Doctor doctor = doctorData.toDoctor();
+		Doctor dbDoctor = doctorDao.save(doctor);
+		
+		return new DoctorData(dbDoctor);
 	}
 	
 	@Transactional(readOnly = false)
