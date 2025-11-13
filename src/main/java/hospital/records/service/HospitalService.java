@@ -9,14 +9,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hospital.records.controller.model.OfficeData;
+import hospital.records.controller.model.PatientData;
 import hospital.records.dao.OfficeDao;
+import hospital.records.dao.PatientDao;
 import hospital.records.entity.Office;
+import hospital.records.entity.Patient;
 
 @Service
 public class HospitalService {
 
 	@Autowired
 	private OfficeDao officeDao;
+	private PatientDao patientDao;
+	
+	//Post service methods
 	
 	@Transactional(readOnly = false)
 	public OfficeData saveOffice(OfficeData officeData) {
@@ -25,6 +31,16 @@ public class HospitalService {
 		
 		return new OfficeData(dbOffice);
 	}
+	
+	@Transactional(readOnly = false)
+	public PatientData savePatient(PatientData patientData) {
+		Patient patient = patientData.toPatient();
+		Patient dbPatient = patientDao.save(patient);
+		
+		return new PatientData(dbPatient);
+	}
+	
+	//Get service methods
 
 	@Transactional(readOnly = true)
 	public OfficeData retrieveOfficeWithId(Long officeId) {
@@ -55,5 +71,7 @@ public class HospitalService {
 		Office office = findOfficeWithId(officeId);
 		officeDao.delete(office);
 	}
+
+	
 	
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import hospital.records.controller.model.OfficeData;
+import hospital.records.controller.model.PatientData;
 import hospital.records.service.HospitalService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,12 +27,23 @@ public class HospitalController {
 	@Autowired
 	private HospitalService hospitalService;
 	
+	//Post methods
+	
 	@PostMapping("/office")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public OfficeData createOffice(@RequestBody OfficeData officeData) {
 		log.info("Creating office {}", officeData);
 		return hospitalService.saveOffice(officeData);
 	}
+	
+	@PostMapping("/patient")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public PatientData createPatient(@RequestBody PatientData patientData) {
+		log.info("Creating patient {}", patientData);
+		return hospitalService.savePatient(patientData);
+	}
+	
+	//Get Methods
 	
 	@GetMapping("/office/{officeId}")
 	public OfficeData retrieveOffice(@PathVariable Long officeId) {
