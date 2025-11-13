@@ -30,14 +30,6 @@ public class OfficeData {
 		}
 	}
 	
-	//For test if I decide to do that
-	public OfficeData(Long officeId, String officeLocation, String officeName, String officeZip, String officePhone) {
-		this.officeId = officeId;
-		this.officeLocation = officeLocation;
-		this.officeName = officeName;
-		this.officeZip = officeZip;
-		this.officePhone = officePhone;
-	}
 	
 	public Office toOffice() {
 		Office office = new Office();

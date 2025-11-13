@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS doctor_patient;
-DROP TABLE IF EXISTS patient;
 DROP TABLE IF EXISTS record;
+DROP TABLE IF EXISTS patient;
 DROP TABLE IF EXISTS doctor;
 DROP TABLE IF EXISTS office;
 
@@ -22,22 +22,21 @@ CREATE TABLE doctor (
 	FOREIGN KEY (office_id) REFERENCES office (office_id) ON DELETE CASCADE
 );
 
-CREATE TABLE record (
-	record_id int NOT NULL AUTO_INCREMENT,
-	patient_id int NOT NULL,
-	diagnosis TEXT(1000),
-	PRIMARY KEY (record_id)
-	FOREIGN KEY (patient_id) REFERENCES patient (patient_id) ON DELETE CASCADE
-);
-
 CREATE TABLE patient (
 	patient_id int NOT NULL AUTO_INCREMENT,
 	patient_name varchar(128) NOT NULL,
 	patient_insurance varchar(128),
 	patient_phone varchar(24),
 	patient_address varchar(128),
-	PRIMARY KEY (patient_id),
+	PRIMARY KEY (patient_id)
+);
 
+CREATE TABLE record (
+	record_id int NOT NULL AUTO_INCREMENT,
+	patient_id int NOT NULL,
+	diagnosis TEXT(1000),
+	PRIMARY KEY (record_id),
+	FOREIGN KEY (patient_id) REFERENCES patient (patient_id) ON DELETE CASCADE
 );
 
 CREATE TABLE doctor_patient (

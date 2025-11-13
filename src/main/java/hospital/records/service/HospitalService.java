@@ -24,7 +24,9 @@ public class HospitalService {
 	//Dao references
 	@Autowired
 	private OfficeDao officeDao;
+	@Autowired
 	private DoctorDao doctorDao;
+	@Autowired
 	private PatientDao patientDao;
 	
 	//Post service methods
