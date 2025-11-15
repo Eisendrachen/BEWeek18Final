@@ -28,13 +28,6 @@ public class DoctorData {
 		this.office = doctor.getOffice();
 	}
 	
-	//Constructor
-	public DoctorData(Long doctorId, String doctorName, String doctorSpecialty, Office office) {
-		this.doctorId = doctorId;
-		this.doctorName = doctorName;
-		this.doctorSpecialty = doctorSpecialty;
-		this.office = office;
-	}
 	
 	public Doctor toDoctor() {
 		Doctor doctor = new Doctor();
