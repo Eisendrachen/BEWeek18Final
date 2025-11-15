@@ -106,19 +106,19 @@ public class HospitalController {
 		return hospitalService.retrieveDoctorWithId(doctorId);
 	}
 	
-	@GetMapping("/office")
+	@GetMapping("/doctor")
 	public List<DoctorData> retrieveAllDoctors() {
 		log.info("Getting all doctors in database");
 		return hospitalService.retrieveAllDoctors();
 	}
 	
-	@GetMapping("/patient/patientId}")
+	@GetMapping("/patient/{patientId}")
 	public PatientData retrievePatient(@PathVariable Long patientId) {
 		log.info("Getting patient ID:{}", patientId);
 		return hospitalService.retrievePatientWithId(patientId);
 	}
 	
-	@GetMapping("/office")
+	@GetMapping("/patient")
 	public List<PatientData> retrieveAllPatients() {
 		log.info("Getting all patients in database");
 		return hospitalService.retrieveAllPatients();
