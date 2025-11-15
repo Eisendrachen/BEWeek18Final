@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -55,6 +56,33 @@ public class HospitalController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public RecordData createRecord(@RequestBody RecordData recordData) {
 		log.info("Creating record {}", recordData);
+		return hospitalService.saveRecord(recordData);
+	}
+	
+	//Put Methods
+	@PutMapping("/office/{officeId}")
+	public OfficeData updateOffice(@PathVariable Long officeId, @RequestBody OfficeData officeData) {
+		officeData.setOfficeId(officeId);
+		log.info("Updating office {}", officeData);
+		return hospitalService.saveOffice(officeData);
+	}
+	
+	@PutMapping("/doctor/{doctorId}")
+	public DoctorData updateDoctor(@PathVariable Long doctorId, @RequestBody DoctorData doctorData) {
+		doctorData.setDoctorId(doctorId);
+		log.info("Updating doctor {}", doctorData);
+		return hospitalService.saveDoctor(doctorData);
+	}
+	@PutMapping("/patient/{patientId}")
+	public PatientData updatePatient(@PathVariable Long patientId, @RequestBody PatientData patientData) {
+		patientData.setPatientId(patientId);
+		log.info("Updating patient {}", patientData);
+		return hospitalService.savePatient(patientData);
+	}
+	@PutMapping("/record/{recordId}")
+	public RecordData updateRecord(@PathVariable Long recordId, @RequestBody RecordData recordData) {
+		recordData.setRecordId(recordId);
+		log.info("Updating record {}", recordData);
 		return hospitalService.saveRecord(recordData);
 	}
 	
