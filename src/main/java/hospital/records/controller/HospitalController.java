@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hospital.records.controller.model.DoctorData;
 import hospital.records.controller.model.OfficeData;
 import hospital.records.controller.model.PatientData;
+import hospital.records.controller.model.RecordData;
 import hospital.records.service.HospitalService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,6 +51,13 @@ public class HospitalController {
 		return hospitalService.savePatient(patientData);
 	}
 	
+	@PostMapping("/record")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public RecordData createRecord(@RequestBody RecordData recordData) {
+		log.info("Creating record {}", recordData);
+		return hospitalService.saveRecord(recordData);
+	}
+	
 	//Get Methods
 	
 	@GetMapping("/office/{officeId}")
@@ -63,6 +71,8 @@ public class HospitalController {
 		log.info("Getting all offices in database");
 		return hospitalService.retrieveAllOffices();
 	}
+	
+	//Delete Methods
 	
 	@DeleteMapping("/office/{officeId}")
 	public Map<String, String> deleteOffice(@PathVariable Long officeId){

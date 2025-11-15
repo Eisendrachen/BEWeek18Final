@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import hospital.records.controller.model.DoctorData;
 import hospital.records.controller.model.OfficeData;
 import hospital.records.controller.model.PatientData;
+import hospital.records.controller.model.RecordData;
 import hospital.records.dao.DoctorDao;
 import hospital.records.dao.OfficeDao;
 import hospital.records.dao.PatientDao;
@@ -18,6 +19,7 @@ import hospital.records.dao.RecordDao;
 import hospital.records.entity.Doctor;
 import hospital.records.entity.Office;
 import hospital.records.entity.Patient;
+import hospital.records.entity.PatientRecord;
 
 @Service
 public class HospitalService {
@@ -58,6 +60,14 @@ public class HospitalService {
 		return new PatientData(dbPatient);
 	}
 	
+	@Transactional(readOnly = false)
+	public RecordData saveRecord(RecordData recordData) {
+		PatientRecord record = recordData.toRecord();
+		PatientRecord dbRecord = recordDao.save(record);
+		
+		return new RecordData(dbRecord);
+	}
+	
 	//Get service methods
 
 	@Transactional(readOnly = true)
@@ -84,11 +94,14 @@ public class HospitalService {
 		return officeDtos;
 	}
 
+	//Delete service methods
 	@Transactional(readOnly = false)
 	public void deleteOffice(Long officeId) {
 		Office office = findOfficeWithId(officeId);
 		officeDao.delete(office);
 	}
+
+
 
 	
 	
