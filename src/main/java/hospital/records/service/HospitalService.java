@@ -93,13 +93,85 @@ public class HospitalService {
 		
 		return officeDtos;
 	}
+	@Transactional(readOnly = true)
+	public DoctorData retrieveDoctorWithId(Long doctorId) {
+		Doctor doctor = findDoctorWithId(doctorId);
+		return new DoctorData(doctor);
+	}
+	
+	private Doctor findDoctorWithId(Long doctorId) {
+		return doctorDao.findById(doctorId).orElseThrow(() -> new NoSuchElementException("Doctor with ID: " + doctorId + " does not exist."));
+	}
 
+	@Transactional(readOnly = true)
+	public List<DoctorData> retrieveAllDoctors() {
+		List<Doctor> doctorEntities = doctorDao.findAll();
+		List<DoctorData> doctorDtos = new LinkedList<>();
+		
+		for(Doctor doctor : doctorEntities) {
+			DoctorData doctorData = new DoctorData(doctor);
+			doctorDtos.add(doctorData);
+		}
+		
+		return doctorDtos;
+	}
+
+	@Transactional(readOnly = true)
+	public PatientData retrievePatientWithId(Long patientId) {
+		Patient patient = findPatientWithId(patientId);
+		return new PatientData(patient);
+	}
+	
+	private Patient findPatientWithId(Long patientId) {
+		return patientDao.findById(patientId).orElseThrow(() -> new NoSuchElementException("Patient with ID: " + patientId + " does not exist."));
+	}
+
+	@Transactional(readOnly = true)
+	public List<PatientData> retrieveAllPatients() {
+		List<Patient> patientEntities = patientDao.findAll();
+		List<PatientData> patientDtos = new LinkedList<>();
+		
+		for(Patient patient : patientEntities) {
+			PatientData patientData = new PatientData(patient);
+			patientDtos.add(patientData);
+		}
+		
+		return patientDtos;
+	}
+
+	@Transactional(readOnly = true)
+	public RecordData retrieveRecordWithId(Long recordId) {
+		PatientRecord record = findRecordWithId(recordId);
+		return new RecordData(record);
+	}
+	
+	private PatientRecord findRecordWithId(Long recordId) {
+		return recordDao.findById(recordId).orElseThrow(() -> new NoSuchElementException("Record with ID: " + recordId + " does not exist."));
+	}
+	
 	//Delete service methods
 	@Transactional(readOnly = false)
 	public void deleteOffice(Long officeId) {
 		Office office = findOfficeWithId(officeId);
 		officeDao.delete(office);
 	}
+
+	public void deleteDoctor(Long doctorId) {
+		Doctor doctor = findDoctorWithId(doctorId);
+		doctorDao.delete(doctor);
+	}
+
+	public void deletePatient(Long patientId) {
+		Patient patient = findPatientWithId(patientId);
+		patientDao.delete(patient);
+	}
+
+	public void deleteRecord(Long recordId) {
+		PatientRecord record = findRecordWithId(recordId);
+		recordDao.delete(record);
+	}
+
+	
 
 
 

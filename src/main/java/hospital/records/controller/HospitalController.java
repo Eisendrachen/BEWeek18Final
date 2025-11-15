@@ -72,6 +72,40 @@ public class HospitalController {
 		return hospitalService.retrieveAllOffices();
 	}
 	
+	@GetMapping("/doctor/{doctorId}")
+	public DoctorData retrieveDoctor(@PathVariable Long doctorId) {
+		log.info("Getting doctor ID:{}", doctorId);
+		return hospitalService.retrieveDoctorWithId(doctorId);
+	}
+	
+	@GetMapping("/office")
+	public List<DoctorData> retrieveAllDoctors() {
+		log.info("Getting all doctors in database");
+		return hospitalService.retrieveAllDoctors();
+	}
+	
+	@GetMapping("/patient/patientId}")
+	public PatientData retrievePatient(@PathVariable Long patientId) {
+		log.info("Getting patient ID:{}", patientId);
+		return hospitalService.retrievePatientWithId(patientId);
+	}
+	
+	@GetMapping("/office")
+	public List<PatientData> retrieveAllPatients() {
+		log.info("Getting all patients in database");
+		return hospitalService.retrieveAllPatients();
+	}
+	
+	
+	@GetMapping("/record/{recordId}")
+	public RecordData retrieveRecord(@PathVariable Long recordId) {
+		log.info("Getting record ID:{}", recordId);
+		return hospitalService.retrieveRecordWithId(recordId);
+	}
+	
+	//No need for a retrieveAllRecords
+	
+	
 	//Delete Methods
 	
 	@DeleteMapping("/office/{officeId}")
@@ -80,5 +114,29 @@ public class HospitalController {
 		hospitalService.deleteOffice(officeId);
 		
 		return Map.of("message", "Office ID=" + officeId + " was deleted.");
+	}
+	
+	@DeleteMapping("/doctor/{doctorId}")
+	public Map<String, String> deleteDoctor(@PathVariable Long doctorId){
+		log.info("Deleting doctor ID:{}", doctorId);
+		hospitalService.deleteDoctor(doctorId);
+		
+		return Map.of("message", "Doctor ID=" + doctorId + " was deleted.");
+	}
+	
+	@DeleteMapping("/patient/{patientId}")
+	public Map<String, String> deletePatient(@PathVariable Long patientId){
+		log.info("Deleting patient ID:{}", patientId);
+		hospitalService.deletePatient(patientId);
+		
+		return Map.of("message", "Patient ID=" + patientId + " was deleted.");
+	}
+	
+	@DeleteMapping("/record/{officeId}")
+	public Map<String, String> deleteRecord(@PathVariable Long recordId){
+		log.info("Deleting record ID:{}", recordId);
+		hospitalService.deleteRecord(recordId);
+		
+		return Map.of("message", "Record ID=" + recordId + " was deleted.");
 	}
 }

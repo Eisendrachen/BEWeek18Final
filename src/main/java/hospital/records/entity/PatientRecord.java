@@ -24,3 +24,5 @@ public class PatientRecord {
 	@OneToOne
 	private Patient patient;
 }
+
+//It was renamed from Record to PatientRecord because just Record is already an owned name by something in Java
