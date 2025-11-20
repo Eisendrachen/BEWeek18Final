@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS doctor_patient;
-DROP TABLE IF EXISTS record;
 DROP TABLE IF EXISTS patient;
 DROP TABLE IF EXISTS doctor;
 DROP TABLE IF EXISTS office;
+DROP TABLE IF EXISTS record;
 
 CREATE TABLE office (
 	office_id int NOT NULL AUTO_INCREMENT,
@@ -22,22 +22,24 @@ CREATE TABLE doctor (
 	FOREIGN KEY (office_id) REFERENCES office (office_id) ON DELETE CASCADE
 );
 
+CREATE TABLE record (
+	record_id int NOT NULL AUTO_INCREMENT,
+	diagnosis TEXT(1000),
+	PRIMARY KEY (record_id)
+);
+
 CREATE TABLE patient (
 	patient_id int NOT NULL AUTO_INCREMENT,
+	record_id int NOT NULL,
 	patient_name varchar(128) NOT NULL,
 	patient_insurance varchar(128),
 	patient_phone varchar(24),
 	patient_address varchar(128),
-	PRIMARY KEY (patient_id)
+	PRIMARY KEY (patient_id),
+	FOREIGN KEY (record_id) REFERENCES record (record_id) ON DELETE CASCADE
 );
 
-CREATE TABLE record (
-	record_id int NOT NULL AUTO_INCREMENT,
-	patient_id int NOT NULL,
-	diagnosis TEXT(1000),
-	PRIMARY KEY (record_id),
-	FOREIGN KEY (patient_id) REFERENCES patient (patient_id) ON DELETE CASCADE
-);
+
 
 CREATE TABLE doctor_patient (
 	doctor_id int NOT NULL,
@@ -74,21 +76,37 @@ INSERT INTO doctor
 (doctor_id, office_id, doctor_name, doctor_specialty)
 VALUES(4, 3, 'Gave Up', 'Testiology');
 
-INSERT INTO patient
-(patient_id, patient_name, patient_insurance, patient_phone, patient_address)
-VALUES(1, 'The Tester', 'None', '101 354 1554', 'Home 1');
+INSERT INTO record
+(record_id, diagnosis)
+VALUES(1, 'Nothing');
+
+INSERT INTO record
+(record_id, diagnosis)
+VALUES(2, 'Death');
+
+INSERT INTO record
+(record_id, diagnosis)
+VALUES(3, 'Boring');
+
+INSERT INTO record
+(record_id, diagnosis)
+VALUES(4, 'Hollowing');
 
 INSERT INTO patient
-(patient_id, patient_name, patient_insurance, patient_phone, patient_address)
-VALUES(2, 'John Smith', 'Insured', '533 135 1335', 'Home 2');
+(patient_id, record_id, patient_name, patient_insurance, patient_phone, patient_address)
+VALUES(1, 1, 'The Tester', 'None', '101 354 1554', 'Home 1');
 
 INSERT INTO patient
-(patient_id, patient_name, patient_insurance, patient_phone, patient_address)
-VALUES(3, 'The Tested', 'Dental', '049 104 1503', 'Home 3');
+(patient_id, record_id, patient_name, patient_insurance, patient_phone, patient_address)
+VALUES(2, 2, 'John Smith', 'Insured', '533 135 1335', 'Home 2');
 
 INSERT INTO patient
-(patient_id, patient_name, patient_insurance, patient_phone, patient_address)
-VALUES(4, 'Gael Knight', 'Immortality', '425 104 1953', 'Ringed City');
+(patient_id, record_id, patient_name, patient_insurance, patient_phone, patient_address)
+VALUES(3, 3, 'The Tested', 'Dental', '049 104 1503', 'Home 3');
+
+INSERT INTO patient
+(patient_id, record_id, patient_name, patient_insurance, patient_phone, patient_address)
+VALUES(4, 4, 'Gael Knight', 'Immortality', '425 104 1953', 'Ringed City');
 
 INSERT INTO doctor_patient
 (doctor_id, patient_id)
@@ -106,18 +124,3 @@ INSERT INTO doctor_patient
 (doctor_id, patient_id)
 VALUES(4, 4);
 
-INSERT INTO record
-(record_id, patient_id, diagnosis)
-VALUES(1, 1, 'Nothing');
-
-INSERT INTO record
-(record_id, patient_id, diagnosis)
-VALUES(2, 2, 'Death');
-
-INSERT INTO record
-(record_id, patient_id, diagnosis)
-VALUES(3, 3, 'Boring');
-
-INSERT INTO record
-(record_id, patient_id, diagnosis)
-VALUES(4, 4, 'Hollowing');
