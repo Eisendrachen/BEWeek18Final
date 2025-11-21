@@ -39,8 +39,6 @@ CREATE TABLE patient (
 	FOREIGN KEY (record_id) REFERENCES record (record_id) ON DELETE CASCADE
 );
 
-
-
 CREATE TABLE doctor_patient (
 	doctor_id int NOT NULL,
 	patient_id int NOT NULL,

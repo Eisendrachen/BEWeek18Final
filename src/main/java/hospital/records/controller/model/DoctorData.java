@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import hospital.records.entity.Doctor;
-import hospital.records.entity.Office;
 import hospital.records.entity.Patient;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,6 @@ public class DoctorData {
 	private String doctorName;
 	private String doctorSpecialty;
 	private Set<PatientData> patients = new HashSet<>();
-	private Office office;
 	
 	public DoctorData(Doctor doctor) {
 		this.doctorId = doctor.getDoctorId();
@@ -25,7 +23,6 @@ public class DoctorData {
 		for(Patient patient : doctor.getPatients()) {
 			this.patients.add(new PatientData(patient));
 		}
-		this.office = doctor.getOffice();
 	}
 	
 	
@@ -38,7 +35,7 @@ public class DoctorData {
 		for(PatientData patientData : patients) {
 			doctor.getPatients().add(patientData.toPatient());
 		}
-		doctor.setOffice(office);
+		
 		
 		return doctor;
 	}

@@ -3,7 +3,6 @@ package hospital.records.controller.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import hospital.records.entity.Doctor;
 import hospital.records.entity.Patient;
 import hospital.records.entity.PatientRecord;
 import lombok.Data;
@@ -13,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PatientData {
 	private Long patientId;
+	private String patientName;
 	private String patientInsurance;
 	private String patientPhone;
 	private String patientAddress;
@@ -21,12 +21,11 @@ public class PatientData {
 	
 	public PatientData(Patient patient) {
 		this.patientId = patient.getPatientId();
+		this.patientName = patient.getPatientName();
 		this.patientInsurance = patient.getPatientInsurance();
 		this.patientPhone = patient.getPatientPhone();
 		this.patientAddress = patient.getPatientAddress();
-		for(Doctor doctor : patient.getDoctors()) {
-			this.doctors.add(new DoctorData(doctor));
-		}
+		
 		this.record = patient.getRecord();
 	}
 	
@@ -34,12 +33,11 @@ public class PatientData {
 		Patient patient = new Patient();
 		
 		patient.setPatientId(patientId);
+		patient.setPatientName(patientName);
 		patient.setPatientInsurance(patientInsurance);
 		patient.setPatientPhone(patientPhone);
 		patient.setPatientPhone(patientPhone);
-		for(DoctorData doctorData : doctors) {
-			patient.getDoctors().add(doctorData.toDoctor());
-		}
+		
 		patient.setRecord(record);
 		
 		return patient;

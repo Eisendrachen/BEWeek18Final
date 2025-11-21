@@ -22,6 +22,8 @@ public class Patient {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long patientId;
 	@EqualsAndHashCode.Exclude
+	private String patientName;
+	@EqualsAndHashCode.Exclude
 	private String patientInsurance;
 	@EqualsAndHashCode.Exclude
 	private String patientPhone;
@@ -35,6 +37,7 @@ public class Patient {
 	private Set<Doctor> doctors = new HashSet<>();
 	
 	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "recordId")
 	private PatientRecord record;
