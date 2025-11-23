@@ -29,6 +29,8 @@ public class HospitalController {
 	@Autowired
 	private HospitalService hospitalService;
 	
+	//Order of methods is always office, doctor, patient, record, mirroring the flow of the tables
+	
 	//Post methods
 	
 	@PostMapping("/office")
@@ -60,6 +62,8 @@ public class HospitalController {
 	}
 	
 	//Put Methods
+	//Put methods can just use the same service methods as the post methods but they provide an ID for the entry they are overwriting
+	
 	@PutMapping("/office/{officeId}")
 	public OfficeData updateOffice(@PathVariable Long officeId, @RequestBody OfficeData officeData) {
 		officeData.setOfficeId(officeId);

@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+
 @Entity
 @Data
 @Table(name = "record")
@@ -22,3 +23,4 @@ public class PatientRecord {
 }
 
 //It was renamed from Record to PatientRecord because just Record is already an owned name by something in Java
+//Due to this name change it also needs a table annotation to make sure it is named properly
