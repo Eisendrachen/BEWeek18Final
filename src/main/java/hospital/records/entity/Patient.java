@@ -3,7 +3,6 @@ package hospital.records.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,7 +37,7 @@ public class Patient {
 	
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "recordId")
 	private PatientRecord record;
 }
