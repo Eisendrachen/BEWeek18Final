@@ -15,7 +15,7 @@ CREATE TABLE office (
 
 CREATE TABLE doctor (
 	doctor_id int NOT NULL AUTO_INCREMENT,
-	office_id int NOT NULL,
+	office_id int,
 	doctor_name varchar(128) NOT NULL,
 	doctor_specialty varchar(128),
 	PRIMARY KEY (doctor_id),
